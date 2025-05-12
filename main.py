@@ -4,18 +4,18 @@ VIEW_COMMANDS = ('u', 'd', 'x')
 
 clear_screen = lambda: os.system('clear' if os.name == 'posix' else 'cls')
 
-if len(sys.argv) != 2:
-  print('usage: python main.py (filename)')
-	exit(1)
+# A little hacky, but whatevs.
+err_msg = lambda msg, code: print(msg) or (exit(code) and True)
 
+# Some error handling.
+if len(sys.argv) != 2:
+	err_msg('usage: python main.py (filename)', 1)
 try:
 	with open(sys.argv[1]) as f:
 		lines = f.readlines()
+		visual_lines = lines[:]
 except:
-	print(f"ERROR: file {sys.argv[1]} doesn't exist!")
-	exit(1)
-
-visual_lines = lines[:]
+	err_msg(f"ERROR: file {sys.argv[1]} doesn't exist!", 1)
 
 def parse_command(command):
 	# Valid commands, for now, are of the format: nd, nu, nx, where n is a single digit 
@@ -31,8 +31,7 @@ def parse_command(command):
 		return (int(command[0]), command[1])
 	return (None, None)
 
-
-
+# This looks unsightly. TODO: erase it from existence.
 previous_command = (None, None)
 
 while True:
@@ -48,10 +47,8 @@ while True:
 		for i in range(occurrence):
 			match option:
 				case 'u':
-					try:
+					if visual_lines:
 						visual_lines.pop()
-					except:
-						pass
 				case 'd':
 					if visual_lines != lines:
 						visual_lines.append(lines[len(visual_lines)])
