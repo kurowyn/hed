@@ -7,7 +7,9 @@ Given a file argument, the program shows the entire contents of that file.
 While the file is being shown, you can enter one of several options to interact with the file:
 
 __u__: go up a line
+
 __d__: go down a line
+
 __x__: exit
 
 You can precede each of these commands by a single digit positive integer _n_ in order to repeat them an _n_ number of times.
