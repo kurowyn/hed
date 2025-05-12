@@ -16,4 +16,6 @@ You can also precede each of these commands by a <ins>single digit positive inte
 
 Pressing space invokes the previous command, so that if you used _u_ beforehand, and then press space afterwards, you'll keep on going up the file.
 
+Currently, only reading a file is supported.
+
 More improvements coming soon.
