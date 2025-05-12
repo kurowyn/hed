@@ -12,7 +12,7 @@ __d__: go down a line
 
 __x__: exit
 
-You can precede each of these commands by a single digit positive integer _n_ in order to repeat them an _n_ number of times.
+You can also precede each of these commands by a single digit positive integer _n_ in order to repeat them an _n_ number of times.
 
 Pressing space invokes the previous command, so that if you used _u_ beforehand, and then press space afterwards, you'll keep on going up the file.
 
