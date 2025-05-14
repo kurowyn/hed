@@ -31,7 +31,6 @@ def parse_command(command):
 		return (int(command[0]), command[1])
 	return (None, None)
 
-# This looks unsightly. TODO: erase it from existence.
 previous_command = (None, None)
 
 while True:
@@ -39,25 +38,19 @@ while True:
 
 	print(*visual_lines, sep = '', end = '')
 
-	command = parse_command(input())
+	if not all(command := parse_command(input())):
+		command = previous_command
 
-	occurrence, option = command if command != (None, None) else previous_command
+	match command:
+		case (occurrence, 'u'):
+			if visual_lines[1:]:
+				visual_lines = visual_lines[:len(visual_lines) - occurrence]
+		case (occurrence, 'd'):
+				visual_lines.extend(lines[len(visual_lines):len(visual_lines) + occurrence])
+		case (occurrence, 'x'):
+				print('Exiting...')
+				exit(0)
+		case _:
+			continue
 
-	if option != None:
-		for i in range(occurrence):
-			match option:
-				case 'u':
-					if visual_lines:
-						visual_lines.pop()
-				case 'd':
-					if visual_lines != lines:
-						visual_lines.append(lines[len(visual_lines)])
-					else: 
-						break
-				case 'x':
-					print('Exiting...')
-					exit(0)
-				case _:	
-					break
-
-	previous_command = occurrence, option
+	previous_command = command
